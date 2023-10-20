@@ -9,46 +9,121 @@
 // 1,"21321",oi;3,"31232";
 const fs = require('fs')
 
+let byteList = {};
+
+let memory = {
+    "x" : 10,
+    "y" : 11
+};
+
+let loopMemory = []
+let ifMemory = []
+
 
 //#region Comandos
-const endFor = (x, y) => {
+const add = (x) => {
+    let varName = x[0]
+
+    x.slice(1).forEach(num => {
+        memory[varName] = +memory[varName] + +num
+    });
+}
+
+const sub = (x) => {
+    let varName = x[0]
+
+    x.slice(1).forEach(num => {
+        memory[varName] = +memory[varName] - +num
+    });
+}
+
+const div = (x) => {
+    return x[0] / x[1];
+}
+
+const mult = (x) => {
+    return x[0] * x[1];
+}
+
+const endWhile = (x) => {
     
 }
 
-const myFor = (x, y) => {
-    
+const myWhile = (x) => {
+    loopMemory.push(x[0])
+
+
 }
 
-const endIf = (x, y) => {
-    
+const endIf = (x) => {
+    console.log("endif")
 }
 
 const myIf = (x) => {
-    
+    return memory[x[0]] === "true"
 }
 
-const comp = (x, y) => {
-    
+const equals = (x) => {
+    let a = x[1]
+    let b = x[2]
+
+    if (memory[a]) a = memory[a]
+    if (memory[b]) b = memory[b]
+
+    memory[x[0]] = (+a === +b).toString();
 }
 
-const createVar = (x, y) => {
+const smallerThan = (x) => {
+    let a = x[1]
+    let b = x[2]
 
+    if (memory[a]) a = memory[a]
+    if (memory[b]) b = memory[b]
+
+    memory[x[0]] = (+a < +b).toString();
+}
+
+const biggerThan = (x) => {
+    let a = x[1]
+    let b = x[2]
+
+    if (memory[a]) a = memory[a]
+    if (memory[b]) b = memory[b]
+
+    memory[x[0]] = (+a > +b).toString();
+}
+
+const createVar = (x) => {
+    memory[x[0]] = x[1];
 }
 
 const print = (x) => {
+    let varValue = memory[x]
+
+    if (varValue)
+    {
+        console.log(varValue)
+        return
+    }
     console.log(x)
 }
+
 //#endregion
 
-let byteVars = {};
 let byteCodes = {
     "1": createVar,
     "2": print,
-    "3": comp,
+    "3": equals,
     "4": myIf,
-    "5": endIf,
-    "6": myFor,
-    "7": endFor
+    "5": myWhile,
+    "6": add,
+    "7": sub,
+    "8": div,
+    "9": mult,
+    "10": endIf,
+    "11": endWhile,
+    "12": smallerThan,
+    "13": biggerThan
 }
 
 
@@ -58,8 +133,41 @@ fs.readFile('arq.co', (err, inputD) => {
     // console.log(inputD.toString());
     // // byteCodes["1"]("Teste")
 
-    let byteList = inputD.toString().split(";")
+    byteList = inputD.toString().split(";")
 
-    byteList.forEach(x => console.log(x))
 
+    for (let i = 0; i < byteList.length; i++){
+        let line = byteList[i];
+
+        let command = line.split(",");
+
+        if (command[0] === '') 
+            return;
+
+        let args = command.slice(1)
+
+        if (command[0] === "4") {
+            // console.log(myIf(args))
+            if (myIf(args)) {
+                continue
+            }
+
+
+            for (let j = i; byteList[j] !== "10"; j++) {
+                i = j;
+            }
+
+            continue;
+        }
+
+        if (command[0] === "10")
+            continue
+
+        if(command[0] === "5")
+        {
+            args = [i, ...args]
+        }
+
+        byteCodes[command[0]](args);
+    }
 })

@@ -4,9 +4,17 @@
 comDict = {
     "var": "1",
     "print": "2",
-    "comp": "3",
+    "equals": "3",
     "if": "4",
-    "for": "5"
+    "while": "5",
+    "add": "6",
+    "sub": "7",
+    "div": "8",
+    "mult": "9",
+    "endif": "10",
+    "endwhile": "11",
+    "smaller": "12",
+    "bigger": "13"
 }
 
 arq = open("arq.ln", "r")
@@ -14,11 +22,14 @@ comList = arq.readlines()
 arqCom = open("arq.co", "w")
 
 for com in comList:
-    c = com.split(" ")
-    
-    arqCom.write(f"{comDict[c[0]]}")
+    if len(com.replace('\n', "")) == 0:
+        continue
 
-    args = [x.strip() for x in c[1:]]
+    codeList = com.replace("\n", "").split(" ")
+    
+    arqCom.write(f"{comDict[codeList[0]]}")
+
+    args = [x.strip() for x in codeList[1:]]
 
     if len(args) > 0:
         arqCom.write(',' + ','.join(args))
