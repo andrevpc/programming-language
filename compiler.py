@@ -26,9 +26,16 @@ comDict = {
     "MaisMaior": "13"
 }
 
+<<<<<<< HEAD
 arq = open("arq.girias", "r")
+=======
+script = input("File to read> ");
+compiledFile = script.replace(".ln", ".co")
+
+arq = open(script, "r")
+>>>>>>> main
 comList = arq.readlines()
-arqCom = open("arq.co", "w")
+arqCom = open(compiledFile, "w")
 
 for com in comList:
     if len(com.replace('\n', "")) == 0:

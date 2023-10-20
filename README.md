@@ -1,5 +1,11 @@
 # programming-language
 
+## Usage
+> py compiler.py
+
+> node interpreter.js <file.co>
+
+
 | Commands | Function | Usage | Example | Similar
 |------|------|------|------|------|
 | var | Creates variable | var name string <br> var name number | var x Hello World <br> var x 5 | x = "Hello World" <br> x = 5 |
