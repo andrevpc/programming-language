@@ -17,9 +17,12 @@ comDict = {
     "bigger": "13"
 }
 
-arq = open("arq.ln", "r")
+script = input("File to read> ");
+compiledFile = script.replace(".ln", ".co")
+
+arq = open(script, "r")
 comList = arq.readlines()
-arqCom = open("arq.co", "w")
+arqCom = open(compiledFile, "w")
 
 for com in comList:
     if len(com.replace('\n', "")) == 0:
