@@ -26,7 +26,7 @@ comDict = {
 
 
 script = input("File to read> ");
-compiledFile = script.replace(script.split(".")[1], ".co")
+compiledFile = script.replace("." + script.split(".")[1], ".co")
 
 arq = open(script, "r")
 comList = arq.readlines()

@@ -129,6 +129,7 @@ let byteCodes = {
     "13": biggerThan
 }
 
+console.log(process.argv[2].replace(".\\", ""))
 fs.readFile(process.argv[2].replace(".\\", ""), (err, inputD) => {
     if (err) throw err;
     byteList = inputD.toString().split(";")
