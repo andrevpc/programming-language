@@ -20,3 +20,10 @@ smaller result2 20 18
 if result2
 print c
 endif
+
+var d 0
+div d 5 5
+print d
+
+mult d 5 5
+print d
