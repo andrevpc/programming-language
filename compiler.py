@@ -1,5 +1,3 @@
-# var -> var nome valor
-# print -> print valor
 # var = Trem;
 # print = Bizu;
 # equals = Ingual;
@@ -26,14 +24,11 @@ comDict = {
     "MaisMaior": "13"
 }
 
-<<<<<<< HEAD
-arq = open("arq.girias", "r")
-=======
+
 script = input("File to read> ");
-compiledFile = script.replace(".ln", ".co")
+compiledFile = script.replace(script.split(".")[1], ".co")
 
 arq = open(script, "r")
->>>>>>> main
 comList = arq.readlines()
 arqCom = open(compiledFile, "w")
 
