@@ -1,23 +1,32 @@
 # var -> var nome valor
 # print -> print valor
+# var = Trem;
+# print = Bizu;
+# equals = Ingual;
+# if = Cpah; 
+# add = Crescenta
+# sub = Menas;
+# div = Rachar;
+# mult = Vezes;
+# endif = Poise; 
+# smaller = CoeMenor;
+# bigger = MaisMaior; 
 
 comDict = {
-    "var": "1",
-    "print": "2",
-    "equals": "3",
-    "if": "4",
-    "while": "5",
-    "add": "6",
-    "sub": "7",
-    "div": "8",
-    "mult": "9",
-    "endif": "10",
-    "endwhile": "11",
-    "smaller": "12",
-    "bigger": "13"
+    "Trem": "1",
+    "Bizu": "2",
+    "Ingual": "3",
+    "Cpah": "4",
+    "Crescenta": "6",
+    "Menas": "7",
+    "Rachar": "8",
+    "Vezes": "9",
+    "Poise": "10",
+    "CoeMenor": "12",
+    "MaisMaior": "13"
 }
 
-arq = open("arq.ln", "r")
+arq = open("arq.girias", "r")
 comList = arq.readlines()
 arqCom = open("arq.co", "w")
 
