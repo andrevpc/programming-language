@@ -1,0 +1,11 @@
+var = Trem;
+print = Bizu;
+equals = Ingual;
+if = Cpa; 
+add = Crescenta
+sub = Menas;
+div = Rachar;
+mult = Vezes;
+endif = Poise; 
+smaller = Coemenor;
+bigger = Maismaior; 
