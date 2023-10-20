@@ -1,12 +1,3 @@
-// 1 -> var
-// 2 -> print
-// 3 -> comp
-// 4 -> if
-// 5 -> endif
-// 6 -> for
-// 7 -> endfor
-
-// 1,"21321",oi;3,"31232";
 const fs = require('fs')
 
 let byteList = {};
@@ -17,15 +8,13 @@ let memory = {
 };
 
 let loopMemory = []
-let ifMemory = []
 
-
-//#region Comandos
+//#region Functions
 const add = (x) => {
     let varName = x[0]
 
     x.slice(1).forEach(num => {
-        memory[varName] = +memory[varName] + +num
+        memory[varName] = (+memory[varName] + +num).toString()
     });
 }
 
@@ -33,16 +22,20 @@ const sub = (x) => {
     let varName = x[0]
 
     x.slice(1).forEach(num => {
-        memory[varName] = +memory[varName] - +num
+        memory[varName] = (+memory[varName] - +num).toString()
     });
 }
 
 const div = (x) => {
-    return x[0] / x[1];
+    memory[x[0]] = (+[x[1]] / +[x[2]]).toString()
 }
 
 const mult = (x) => {
-    return x[0] * x[1];
+    let varName = x[0]
+
+    x.slice(1).forEach(num => {
+        memory[varName] = (+memory[varName] * +num).toString()
+    });
 }
 
 const endWhile = (x) => {
@@ -94,6 +87,11 @@ const biggerThan = (x) => {
 }
 
 const createVar = (x) => {
+    if(x.length > 2)
+    {
+        memory[x[0]] = x.slice(1)
+        return
+    }
     memory[x[0]] = x[1];
 }
 
@@ -102,10 +100,15 @@ const print = (x) => {
 
     if (varValue)
     {
+        if (typeof(varValue) != "string" && varValue.length >= 2)
+        {
+            console.log(varValue.join(" "))
+            return
+        }
         console.log(varValue)
         return
     }
-    console.log(x)
+    console.log(x.join(" "))
 }
 
 //#endregion
@@ -130,9 +133,6 @@ let byteCodes = {
 
 fs.readFile('arq.co', (err, inputD) => {
     if (err) throw err;
-    // console.log(inputD.toString());
-    // // byteCodes["1"]("Teste")
-
     byteList = inputD.toString().split(";")
 
 
@@ -147,15 +147,11 @@ fs.readFile('arq.co', (err, inputD) => {
         let args = command.slice(1)
 
         if (command[0] === "4") {
-            // console.log(myIf(args))
-            if (myIf(args)) {
-                continue
-            }
+            if (myIf(args)) continue
 
 
-            for (let j = i; byteList[j] !== "10"; j++) {
+            for (let j = i; byteList[j] !== "10"; j++)
                 i = j;
-            }
 
             continue;
         }
@@ -164,9 +160,7 @@ fs.readFile('arq.co', (err, inputD) => {
             continue
 
         if(command[0] === "5")
-        {
             args = [i, ...args]
-        }
 
         byteCodes[command[0]](args);
     }
